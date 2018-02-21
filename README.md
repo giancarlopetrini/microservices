@@ -1,5 +1,3 @@
 ### humble beginnings....
 
-TODOs
-
-Investigate dep init in folder outside GOPATH (better way to run multi-stage build?)
+Based on Ewan Valentine's example: https://ewanvalentine.io/microservices-in-golang-part-1/
