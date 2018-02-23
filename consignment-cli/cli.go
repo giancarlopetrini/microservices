@@ -22,7 +22,10 @@ func parseFile(file string) (*pb.Consignment, error) {
 	if err != nil {
 		return nil, err
 	}
-	json.Unmarshal(data, &consigment)
+	if err = json.Unmarshal(data, &consigment); err != nil {
+		return nil, err
+	}
+
 	return consigment, err
 }
 
