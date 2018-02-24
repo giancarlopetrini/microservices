@@ -43,10 +43,12 @@ func (repo *VesselRepository) FindAvailable(spec *pb.Specification) (*pb.Vessel,
 	return vessel, nil
 }
 
+// Create - insert vessel to collection
 func (repo *VesselRepository) Create(vessel *pb.Vessel) error {
 	return repo.collection().Insert(vessel)
 }
 
+// Close - close db collection
 func (repo *VesselRepository) Close() {
 	repo.session.Close()
 }

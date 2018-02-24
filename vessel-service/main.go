@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	pb "github.com/giancarlopetrini/microservices/vessel-service/proto/vessel"
@@ -12,9 +13,14 @@ const (
 	defaultHost = "localhost:27017"
 )
 
-// temp vessel data for testing...
-vessels := []*pb.Vessel{
-	&pb.Vessel{Id: "vessel001", Name: "Mister Nice Vessel", MaxWeight: 20000, Capacity: 500},
+func createDummyData(repo Repository) {
+	defer repo.Close()
+	vessels := []*pb.Vessel{
+		{Id: "vessel001", Name: "Kane's Salty Secret", MaxWeight: 200000, Capacity: 500},
+	}
+	for _, v := range vessels {
+		repo.Create(v)
+	}
 }
 
 func main() {
@@ -33,6 +39,8 @@ func main() {
 	}
 
 	repo := &VesselRepository{session.Copy()}
+
+	createDummyData(repo)
 
 	srv := micro.NewService(
 		micro.Name("go.micro.srv.vessel"),

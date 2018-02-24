@@ -9,8 +9,8 @@ import (
 
 	"os"
 
-	vesselProto "github.com/EwanValentine/shippy/vessel-service/proto/vessel"
 	pb "github.com/giancarlopetrini/microservices/consignment-service/proto/consignment"
+	vesselProto "github.com/giancarlopetrini/microservices/vessel-service/proto/vessel"
 	"github.com/micro/go-micro"
 )
 
@@ -53,7 +53,7 @@ func main() {
 	// Init will parse the command line flags.
 	srv.Init()
 
-	// Register handler
+	// Register handler //
 	pb.RegisterShippingServiceHandler(srv.Server(), &service{session, vesselClient})
 
 	// Run the server
